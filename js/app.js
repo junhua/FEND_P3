@@ -22,7 +22,7 @@ Enemy.prototype.update = function(dt) {
         this.x = 0;
     }
 
-    checkCollision(this);
+    this.checkCollision(this);
 };
 
 // Draw the enemy on the screen, required method for game
@@ -31,7 +31,7 @@ Enemy.prototype.render = function() {
 };
 
 // check collision
-var checkCollision = function(anEnemy) {
+Enemy.prototype.checkCollision = function(anEnemy) {
     // check for collision between enemy and player
     if (
         player.y + 131 >= anEnemy.y + 90 &&
@@ -59,46 +59,46 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Player.prototype.update = function(){}
+Player.prototype.update = function() {}
 
 Player.prototype.handleInput = function(keyPress) {
     if (keyPress == 'left') {
-        player.x -= player.speed;
+        this.x -= this.speed;
     }
     if (keyPress == 'up') {
-        player.y -= player.speed - 20;
+        this.y -= this.speed - 20;
     }
     if (keyPress == 'right') {
-        player.x += player.speed;
+        this.x += this.speed;
     }
     if (keyPress == 'down') {
-        player.y += player.speed - 20;
+        this.y += this.speed - 20;
     }
 
-    checkBoundary(player.x, player.y);
-    checkWin(player.x, player.y);
+    this.checkBoundary(this.x, this.y);
+    this.checkWin(this.x, this.y);
 };
 
 
-var checkBoundary = function(x, y) {
+Player.prototype.checkBoundary = function(x, y) {
     // handle cases where player move to boundaries
     if (y > 383) {
-        y = 383;
+        this.y = 383;
     }
     if (x > 402.5) {
-        x = 2.5;
+        this.x = 2.5;
     }
     if (x < 2.5) {
-        x = 402.5;
+        this.x = 402.5;
     }
 }
 
-var checkWin = function(x, y) {
+Player.prototype.checkWin = function(x, y) {
     // If win Reset player
-    
+
     if (y + 63 <= 0) {
-        player.x = 202.5;
-        player.y = 383;
+        this.x = 202.5;
+        this.y = 383;
         ctx.fillStyle = 'white';
         ctx.fillRect(0, 0, 505, 171);
     }
@@ -112,7 +112,7 @@ var player = new Player(202.5, 383, 50);
 for (i = 0; i < 3; ++i) {
     var enemy = new Enemy(0, Math.random() * 184 + 50, Math.random() * 256);
     allEnemies.push(enemy);
-}
+};
 
 
 // This listens for key presses and sends the keys to your
