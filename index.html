@@ -11,3 +11,71 @@
     <script src="js/engine.js"></script>
 </body>
 </html>
+
+
+
+
+<!-- Archived -->
+
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Effective JavaScript: Frogger</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<canvas id=c height=200 width=200></canvas>
+	<script>
+		var c = document.querySelector("#c");
+		var ctx = c.getContext("2d");
+
+		ctx.strokeRect(50,50,100,100);
+		ctx.beginPath();
+		ctx.moveTo(95,150);
+		ctx.lineTo(105,150);
+		ctx.lineTo(105,180);
+		ctx.lineTo(95,180);
+		ctx.lineTo(95,150);
+		ctx.fill();
+
+		ctx.moveTo(70,180);
+		ctx.lineTo(130,180);
+		ctx.stroke();
+	</script>
+
+
+
+	<canvas id=imageCanvas height=400 width=400></canvas>
+	<script>
+		var imgcanvas = document.querySelector("#imageCanvas");
+		var ctx = imgcanvas.getContext("2d");
+		var data = ctx.getImageData(0,0,400, 400);
+		
+		function paintGreen(imageData){
+			for (var i=0; i<imageData.data.length; i+=4){
+				if(i%10===0){
+					imageData.data[i+1]=255;
+					imageData.data[i+3]=255;
+				}
+			}
+			ctx.putImageData(imageData,0,0);
+		}
+
+		function grayScale(imageData){
+			var avg = (data[i] + data[i +1] + data[i +2]) / 3;
+      		data[i]     = avg; // red
+      		data[i + 1] = avg; // green
+      		data[i + 2] = avg; // blue
+		}
+		paintGreen(data);
+
+	</script>  
+
+     <script src="js/resources.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/engine.js"></script>
+</body>
+</html>
+ -->
