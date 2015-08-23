@@ -39,11 +39,10 @@ Enemy.prototype.checkCollision = function(anEnemy) {
         player.y + 73 <= anEnemy.y + 135 &&
         player.x + 76 >= anEnemy.x + 11) {
 
-        player.x = 202.5;
-        player.y = 383;
+        reset();
     }
 
-}
+};
 
 // Player object
 var Player = function(x, y, speed) {
@@ -59,7 +58,7 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Player.prototype.update = function() {}
+Player.prototype.update = function() {};
 
 Player.prototype.handleInput = function(keyPress) {
     if (keyPress == 'left') {
@@ -76,7 +75,7 @@ Player.prototype.handleInput = function(keyPress) {
     }
 
     this.checkBoundary(this.x, this.y);
-    this.checkWin(this.x, this.y);
+    this.checkWin(this.y);
 };
 
 
@@ -85,35 +84,36 @@ Player.prototype.checkBoundary = function(x, y) {
     if (y > 383) {
         this.y = 383;
     }
-    if (x > 402.5) {
+    if (x > 405) {
         this.x = 2.5;
     }
-    if (x < 2.5) {
+    if (x < 0) {
         this.x = 402.5;
     }
-}
+};
 
-Player.prototype.checkWin = function(x, y) {
+Player.prototype.checkWin = function(y) {
     // If win Reset player
-
-    if (y + 63 <= 0) {
-        this.x = 202.5;
-        this.y = 383;
-        ctx.fillStyle = 'white';
-        ctx.fillRect(0, 0, 505, 171);
+    if (y <= 0) {
+        reset();
     }
 };
 
 // Game init
 var allEnemies = [];
-var player = new Player(202.5, 383, 50);
+var player = new Player(202.5, 383, 101);
 // let's make it 3 enermies
 
-for (i = 0; i < 3; ++i) {
-    var enemy = new Enemy(0, Math.random() * 184 + 50, Math.random() * 256);
-    allEnemies.push(enemy);
+reset = function() {
+    player = new Player(202.5, 383, 101);
+    allEnemies = [];
+    for (i = 0; i < 3; ++i) {
+        var enemy = new Enemy(0, Math.random() * 184 + 50, Math.random() * 256);
+        allEnemies.push(enemy);
+    }
 };
 
+reset();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
